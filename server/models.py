@@ -10,12 +10,6 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
-# Import necessary modules
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import validates
-from sqlalchemy_serializer import SerializerMixin
-
-db = SQLAlchemy()
 
 # Hero Model
 class Hero(db.Model, SerializerMixin):
@@ -34,7 +28,7 @@ class Hero(db.Model, SerializerMixin):
 
     # Serialization rules
     # When serializing a hero object, remove the hero_powers column 
-    serialize_rules = ('-hero_powers',)
+    serialize_rules = ('-hero_powers.heroes',)
 
     def __repr__(self):
         return f'<Hero {self.id}>'
